@@ -12,7 +12,7 @@
 	// <input type="submit" name="ADD_BTN" value="Register" />
 
 
-for (var j = 0; j < elements.length; j++) {
+for (var j = 0; j < elements.length; j++){
 	
 	var element = elements[j];
 	var out = "Link " + j + ": " + element.getAttribute('href');
@@ -21,14 +21,14 @@ for (var j = 0; j < elements.length; j++) {
 	for (var i = 0; i < element.childNodes.length; i++){
 	
 		var node = element.childNodes[i];
-		if ('IMG' == element.childNodes[i].nodeName){
-			console.log("href img");
+		var nodeText = node.nodeValue;
+
+		if ((3 === node.nodeType) && (/\S/.test(nodeText))){
+			var newText = nodeText + " [" + j + "]";
+			console.log(newText);
+			element.replaceChild(document.createTextNode(newText), node);
 		}
-		if (3 === node.nodeType){
-			var text = node.nodeValue;
-			var newText = text + " " + j;
-            element.replaceChild(document.createTextNode(newText), node);
-		}
+
 	}
 
 }
